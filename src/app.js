@@ -23,11 +23,11 @@ function validateExistingId(request, response, next){
 
 app.use('/repositories/:id', validateExistingId);
 
-app.get("/repositories", (request, response) => {
+app.get('/repositories', (request, response) => {
   return response.json(repositories);
 });
 
-app.post("/repositories", (request, response) => {
+app.post('/repositories', (request, response) => {
   const { title, url, techs } = request.body;
 
   const repository = {id: uuid(), title, url, techs, likes: 0};
@@ -37,7 +37,7 @@ app.post("/repositories", (request, response) => {
   return response.json(repository);
 });
 
-app.put("/repositories/:id", (request, response) => {
+app.put('/repositories/:id', (request, response) => {
   const { id } = request.params;
   const { title, url, techs } = request.body;
 
@@ -50,7 +50,7 @@ app.put("/repositories/:id", (request, response) => {
   return response.status(200).json(repository);
 });
 
-app.delete("/repositories/:id", (request, response) => {
+app.delete('/repositories/:id', (request, response) => {
   const { id } = request.params;
 
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
@@ -58,9 +58,9 @@ app.delete("/repositories/:id", (request, response) => {
   repositories.splice(repositoryIndex, 1);
 
   return response.status(204).send();
-});
+});   
 
-app.post("/repositories/:id/like", (request, response) => {
+app.post('/repositories/:id/like', (request, response) => {
   const { id } = request.params;
 
   const repository = repositories.find(repository => repository.id === id);
